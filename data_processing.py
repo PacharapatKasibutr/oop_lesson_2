@@ -119,6 +119,22 @@ my_table3_filtered_forward = my_table4.filter(lambda x: x['position'] == 'forwar
 my_table3_filtered_mid = my_table4.filter(lambda x: x['position'] == 'midfielder')
 print(f"Average passed made by forward = {int(my_table3_filtered_forward.aggregate(lambda x: sum(x)/len(x), 'passes'))} VS midfielder = {int(my_table3_filtered_mid.aggregate(lambda x: sum(x)/len(x), 'passes'))}")
 
+#titanic1
+my_table3_filtered_first = my_table3.filter(lambda x: int(x['class']) == 1)
+my_table3_filtered_third = my_table3.filter(lambda x: int(x['class']) == 3)
+print(f"Average fares by first class = {int(my_table3_filtered_first.aggregate(lambda x: sum(x)/len(x), 'fare'))} and third class = {int(my_table3_filtered_third.aggregate(lambda x: sum(x)/len(x), 'fare'))}")
+#titanic2
+my_table3_filtered_male = my_table3.filter(lambda x: x['gender'] == "M")
+list_m = my_table3.filter(lambda x: x['gender'] == "M").select(['survived'])
+my_table3_filtered_male_survive = my_table3_filtered_male.filter(lambda x: x['survived'] == 'yes')
+list_ms = my_table3_filtered_male.filter(lambda x: x['survived'] == 'yes').select(['survived'])
+
+my_table3_filtered_female = my_table3.filter(lambda x: x['gender'] == "F")
+list_f = my_table3.filter(lambda x: x['gender'] == "F").select(['survived'])
+my_table3_filtered_female_survive = my_table3_filtered_female.filter(lambda x: x['survived'] == 'yes')
+list_fs = my_table3_filtered_female.filter(lambda x: x['survived'] == 'yes').select(['survived'])
+
+print(f"survival rate of male = {(len(list_ms)/len(list_m))*100} and survival rate of female = {(len(list_fs)/len(list_f))*100}")
 # my_table1 = my_DB.search('cities')
 #
 # print("Test filter: only filtering out cities in Italy")
